@@ -1,0 +1,3 @@
+DB_URL=mongodb://localhost:27017/chat
+PORTNUMBER=10004
+TZ=UTC
