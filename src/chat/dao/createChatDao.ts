@@ -1,9 +1,9 @@
 import { IsNotEmpty, IsDate , IsString, IsBoolean } from 'class-validator';
 
-export class CreateUserDao {
+export class CreateChatDao {
   @IsString()
   @IsNotEmpty()
-  userId: string;
+  ChatId: string;
 
   @IsString()
   @IsNotEmpty()

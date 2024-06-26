@@ -1,0 +1,39 @@
+version: "3"
+services:
+  chat-1:
+    container_name: chat-1
+    ports:
+      - 10004:10004
+    image: chat-test3
+    environment:
+      CORECOUNT: 1
+      TZ: UTC
+      DB_URL: mongodb://mongodb:27017
+      PORTNUMBER: 10004
+      SOCKET_END_POINT: /test
+      REDIS_URL: redis://redis:6379
+  
+  chat-2:
+    container_name: chat-2
+    ports:
+      - 10005:10004
+    image: chat-test3
+    environment:
+      CORECOUNT: 1
+      TZ: UTC
+      DB_URL: mongodb://mongodb:27017
+      PORTNUMBER: 10004
+      SOCKET_END_POINT: /test
+      REDIS_URL: redis://redis:6379
+  
+  mongodb:
+    container_name: mongodb
+    ports:
+      - 27018:27017
+    image: mongo
+
+  redis:
+    container_name: redis
+    ports:
+      - 6379:6379
+    image: redis
