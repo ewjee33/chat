@@ -8,7 +8,7 @@
 1. Repo 를 다운로드 후에 .envexample 파일 설명에 맞게 .env 파일 생성 
 2. npm install 로 필요 package 설치
 3. nest start 명령어를 통해 시작
-* docker-compose.yaml 파일 필요에 맞게 수정해 사용 가능
+* Dockerfile로 이미지 빌드 후 해당 이미지명을 docker-compose.yaml 파일 필요에 맞게 수정해 사용 가능
 
 ## .env File Example 
 ```bash
