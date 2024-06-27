@@ -3,14 +3,14 @@ import { IsNotEmpty, IsDate , IsString, IsBoolean } from 'class-validator';
 export class CreateChatDao {
   @IsString()
   @IsNotEmpty()
-  ChatId: string;
+  teamId: string;
 
   @IsString()
   @IsNotEmpty()
-  password: string;
+  message: string;
 
   @IsString()
   @IsNotEmpty()
-  consumerId : string;
+  userId : string;
 
 }

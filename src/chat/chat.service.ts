@@ -25,7 +25,7 @@ export class ChatService {
             const newChats = await this.chatRepository.findChats(findChatDao , session , projectionOptions , findOptions , 0);
             return newChats;
         } catch (error){
-            return null;
+            return [];
         }
     }
 

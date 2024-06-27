@@ -1,73 +1,41 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Chat
+- Nest.js 기반의 Socket.io용 Socket 서버
+- Redis의 Pub / Sub 기능을 활용해 두개 이상의 인스턴스 사용 가능 
+- Chat History 추적을 위한 MongoDB 사용
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 사용법 
+1. Repo 를 다운로드 후에 .envexample 파일 설명에 맞게 .env 파일 생성 
+2. npm install 로 필요 package 설치
+3. nest start 명령어를 통해 시작
+* docker-compose.yaml 파일 필요에 맞게 수정해 사용 가능
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
+## .env File Example 
 ```bash
-$ npm install
+DB_URL=mongodb://Mongo 주소 
+PORTNUMBER=사용할 포트 번호 
+SOCKET_END_POINT=/test
+REDIS_URL=redis://Redis 주소
+TZ=사용할 타임존 
 ```
 
-## Running the app
+## Socket Event Subscribe / Emit Pattern  
+1. joinTeamChat
+- Arg : teamId(string)
+- Res : eventName : 'joinTeam' , `Client ${client.id} joined room ${teamId}
 
-```bash
-# development
-$ npm run start
+2. leaveTeamChat
+- Arg : teamId(string)
+- Res : eventName : 'leftTeam' , `Client ${client.id} left room ${teamId}
 
-# watch mode
-$ npm run start:dev
+3. sendTeamChat
+- Arg : Json - data : { teamId: string, message: string , userId : string}
+- Res : eventName : 'chat' , { clientId: client.id, message: data.message }
 
-# production mode
-$ npm run start:prod
-```
+4. deleteChat
+- Arg : teamId(string)
+- Res : eventName : 'deleteChat' , { chatId: packet['chatId'] }
 
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+5. chatLog
+- Arg : teamId(string)
+- Res : eventName : 'chatlog' , chats

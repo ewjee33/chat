@@ -22,7 +22,7 @@ export class Logger {
   private service : string;
   constructor() {
     this.title = process.env.TITLE || "none";
-    this.service = 'zeus-social';
+    this.service = 'chat';
     this.setupLogFormat();
     this.setupWinstonLogger();
   }

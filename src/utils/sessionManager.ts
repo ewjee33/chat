@@ -8,7 +8,6 @@ export class SessionManager {
   async startSession(): Promise<mongoose.ClientSession>{
     this.session = await mongoose.startSession();
     this.session.startTransaction();
-    console.log(this.session)
     return this.session;
   }
 

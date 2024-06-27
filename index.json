@@ -1,8 +1,0 @@
-{
-	"apps": [
-	  {
-		"instances": 1,
-		"script": "dist/index.js"
-	  }
-	]
-  }
